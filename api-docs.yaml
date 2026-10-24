@@ -1,0 +1,488 @@
+openapi: 3.1.0
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+- url: http://localhost:8087
+  description: Generated server url
+paths:
+  /api/users/{id}:
+    get:
+      tags:
+      - user-controller
+      operationId: getUserById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/UserDTO"
+    put:
+      tags:
+      - user-controller
+      operationId: updateUser
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserDTO"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/UserDTO"
+    delete:
+      tags:
+      - user-controller
+      operationId: deleteUser
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/UserDTO"
+  /api/tasks/{id}:
+    get:
+      tags:
+      - task-controller
+      operationId: getTaskById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/TaskDTO"
+    put:
+      tags:
+      - task-controller
+      operationId: updateTask
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TaskDTO"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/TaskDTO"
+    delete:
+      tags:
+      - task-controller
+      operationId: deleteTask
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/TaskDTO"
+  /api/projects/{id}:
+    get:
+      tags:
+      - project-controller
+      operationId: getProjectById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ProjectDTO"
+    put:
+      tags:
+      - project-controller
+      operationId: updateProject
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProjectDTO"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ProjectDTO"
+    delete:
+      tags:
+      - project-controller
+      operationId: deleteProject
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ProjectDTO"
+  /api/users:
+    get:
+      tags:
+      - user-controller
+      operationId: getAllUsers
+      parameters:
+      - name: pageNumber
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: pageSize
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 10
+      - name: sortBy
+        in: query
+        required: false
+        schema:
+          type: string
+          default: userId
+      - name: sortOrder
+        in: query
+        required: false
+        schema:
+          type: string
+          default: asc
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/UserResponse"
+    post:
+      tags:
+      - user-controller
+      operationId: createUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserDTO"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/UserDTO"
+  /api/tasks:
+    get:
+      tags:
+      - task-controller
+      operationId: getAllTasks
+      parameters:
+      - name: pageNumber
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: pageSize
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 10
+      - name: sortBy
+        in: query
+        required: false
+        schema:
+          type: string
+          default: taskId
+      - name: sortOrder
+        in: query
+        required: false
+        schema:
+          type: string
+          default: asc
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/TaskResponse"
+    post:
+      tags:
+      - task-controller
+      operationId: createTask
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TaskDTO"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/TaskDTO"
+  /api/projects:
+    get:
+      tags:
+      - project-controller
+      operationId: getAllProjects
+      parameters:
+      - name: pageNumber
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: pageSize
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 10
+      - name: sortBy
+        in: query
+        required: false
+        schema:
+          type: string
+          default: projectId
+      - name: sortOrder
+        in: query
+        required: false
+        schema:
+          type: string
+          default: asc
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ProjectResponse"
+    post:
+      tags:
+      - project-controller
+      operationId: createProject
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProjectDTO"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ProjectDTO"
+components:
+  schemas:
+    UserDTO:
+      type: object
+      properties:
+        userId:
+          type: integer
+          format: int64
+        userName:
+          type: string
+          maxLength: 100
+          minLength: 0
+        userEmail:
+          type: string
+          format: email
+          minLength: 1
+        userRole:
+          type: string
+      required:
+      - userEmail
+      - userName
+    TaskDTO:
+      type: object
+      properties:
+        taskId:
+          type: integer
+          format: int64
+        taskTitle:
+          type: string
+        taskStatus:
+          type: string
+          enum:
+          - TODO
+          - IN_PROGRESS
+          - DONE
+        taskPriority:
+          type: string
+          enum:
+          - LOW
+          - MEDIUM
+          - HIGH
+        projectId:
+          type: integer
+          format: int64
+        assigneeId:
+          type: integer
+          format: int64
+        dueDate:
+          type: string
+          format: date
+      required:
+      - projectId
+      - taskTitle
+    ProjectDTO:
+      type: object
+      properties:
+        projectId:
+          type: integer
+          format: int64
+        projectName:
+          type: string
+          minLength: 1
+        projectDescription:
+          type: string
+      required:
+      - projectName
+    UserResponse:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: "#/components/schemas/UserDTO"
+        pageNumber:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int32
+        lastPage:
+          type: boolean
+    TaskResponse:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: "#/components/schemas/TaskDTO"
+        pageNumber:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int32
+        lastPage:
+          type: boolean
+    ProjectResponse:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: "#/components/schemas/ProjectDTO"
+        pageNumber:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int32
+        lastPage:
+          type: boolean
